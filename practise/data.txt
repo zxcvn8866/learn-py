@@ -1,0 +1,70 @@
+数据结构的一些总结
+str:字符串对象 不可变 unm = 'zjj'
+dict:字典 和PHP的关联数组结构相似key-value,key对象不可变 d = {'zjj':100,'sq':98,'wql':97}
+     d.get(key) d.pop(key)
+list:有序元素的集合,可变对象 l = [1,2,3] l.pop(i) l.append() l.insert() len(l)
+tuple: 元组，初始化后元素指向不可变 t = (1,2,[x,y]) 如果指向元素为可变对象，则内容是可变的
+set:无重复无序集合 只存储key s = ([1,3,2]) s.add(key) s.remove(key) 交集 并集
+
+
+
+1.字符串对象
+str为不可变对象
+例：a = 'a,b,c'
+b = a.replace('a','A')
+实用函数：
+字符串搜索相关
+搜索指定字符串，没有返回-1：str.find('t')
+指定起始位置搜索：str.find('t',start)
+指定起始及结束位置搜索：str.find('t',start,end)
+从右边开始查找：str.rfind('t')
+搜索到多少个指定字符串：str.count('t')
+字符串替换相关
+替换old为new：str.replace('old','new')
+替换指定次数的old为new：str.replace('old','new',maxReplaceTimes)
+字母处理
+全部大写：str.upper()
+全部小写：str.lower()
+大小写互换：str.swapcase()
+首字母大写，其余小写：str.capitalize()
+首字母大写：str.title()
+print '%s lower=%s' % (str,str.lower())
+print '%s upper=%s' % (str,str.upper())
+print '%s swapcase=%s' % (str,str.swapcase())
+print '%s capitalize=%s' % (str,str.capitalize())
+print '%s title=%s' % (str,str.title())
+格式化相关
+获取固定长度，右对齐，左边不够用空格补齐：str.ljust(width)
+获取固定长度，左对齐，右边不够用空格补齐：str.ljust(width)
+获取固定长度，中间对齐，两边不够用空格补齐：str.ljust(width)
+获取固定长度，右对齐，左边不足用0补齐
+print '%s ljust=%s' % (str,str.ljust(20))
+print '%s rjust=%s' % (str,str.rjust(20))
+print '%s center=%s' % (str,str.center(20))
+print '%s zfill=%s' % (str,str.zfill(20))
+字符串去空格及去指定字符
+去两边空格：str.strip()
+去左空格：str.lstrip()
+去右空格：str.rstrip()
+去两边字符串：str.strip('d')，相应的也有lstrip，rstrip
+str=' python String function '
+print '%s strip=%s' % (str,str.strip())
+str='python String function'
+print '%s strip=%s' % (str,str.strip('d'))
+
+按指定字符分割字符串为数组：str.split(' ')
+
+默认按空格分隔
+str='a b c de'
+print '%s strip=%s' % (str,str.split())
+str='a-b-c-de'
+print '%s strip=%s' % (str,str.split('-'))
+
+字符串判断相关
+是否以start开头：str.startswith('start')
+是否以end结尾：str.endswith('end')
+是否全为字母或数字：str.isalnum()
+是否全字母：str.isalpha()
+是否全数字：str.isdigit()
+是否全小写：str.islower()
+是否全大写：str.isupper()

@@ -17,4 +17,3 @@ print(score)
 # list 有序集合列表 可变 索引数组
 # list 相关函数 len(list) list.pop() list.append(value) list.insert(index,value)
 
-#

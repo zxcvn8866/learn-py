@@ -1,5 +1,5 @@
 #!usr/etc/env python3
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 names = ['Michael', 'Bob', 'Tracy']
 for item in names:
     print(item)

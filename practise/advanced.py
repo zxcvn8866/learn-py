@@ -4,6 +4,7 @@
 # 高级特性 代码越简单，执行效率越高 一行代码能解决的问题绝不用五行代码来解决
 l = []
 n = 1
+
 while n <= 99:
     l.append(n)
     n = n+2
@@ -53,4 +54,62 @@ print(d)
 for x, y in [(1, 2), (3, 4), (5, 6)]:
     print(x, y)
 
-# 列表生成式
+# 列表生成式 python内置的list comprehensions
+l = list(range(1,11))
+l = [x*x for x in range(1,11)]
+l = [x*x for x in range(1,11) if x % 2 == 0]
+# 应用双层循环生成全排列
+l = [m+n for m in 'ABC' for n in 'XYZ']
+
+# 列出当前文件下的所有文件和目录名
+import os
+print([d for d in os.listdir('.')])
+
+# for 循环同时使用多个变量 比如dict的items可以同时迭代key和value
+# 使用两个变量来生成list
+d = {'x':'A','y':'B','z':'C'}
+l = [k+'='+v for k,v in d.items()]
+
+# 将list的所有字符串变成小写
+L = ['Apple','Bank','City','Down','Edit']
+L = [s.lower() for s in L]
+print(L)
+
+L1 = ['Hello', 'World', 18, 'Apple', None]
+L2 = [s.lower() for s in L1 if isinstance(s,str)]
+print(L2)
+
+# 生成器 generator 一边循环一边推算后续元素
+# 定义  1. 将列表生成式的[]改成() []返回list object; ()返回generator object
+# 2.通过函数内部加yield关键字实现复杂逻辑的generator
+g = (x*x for x in range(10))
+
+# 循环generator 属于可迭代对象 保存的是算法
+for n in g:
+    print(n)
+# 著名的裴波拉契数列 除第一个和最后一个数外 任意一个数都可由前两个数相加得到
+def fib(max):
+    n,a, b = 0,0,1
+    while n < max:
+        # print(b)
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+# fib(max) 函数内部加上yield 变成generator对象
+for x in fib(6):
+    print(x)
+# 杨辉三角
+def triangles(max):
+    y = [1]
+    n = 0
+    while n < max:
+        yield y
+        n = n+1
+        y.append(0)
+        y = [y[i-1]+y[i] for i in range(len(y))]
+for l in triangles(10):
+    print(l)
+# 迭代器 Iterator,可迭代对象 Iterable,迭代方法 iter()
+from collections import Iterator,Iterable
+print(isinstance('abc',Iterable))

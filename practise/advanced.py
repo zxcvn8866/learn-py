@@ -111,5 +111,19 @@ def triangles(max):
 for l in triangles(10):
     print(l)
 # 迭代器 Iterator,可迭代对象 Iterable,迭代方法 iter()
-from collections import Iterator,Iterable
-print(isinstance('abc',Iterable))
+def check(x):
+    from collections import Iterator,Iterable
+    return isinstance(x,Iterable) or isinstance(x, Iterator)
+
+data = ['abc',123,['zjj','sq'],{'name':'zjj','sex':0},(1,2,3),set([1,2,3])]
+res = [check(x) for x in data]
+print(res)
+
+arr = iter([1,2,3])
+while True:
+    try:
+        x = next(arr)
+        print(x)
+    except StopIteration:
+        break
+

@@ -52,5 +52,29 @@ print('strtofloat(\'123.456\')=',strtofloat('123.456'))
 # filter函数 用于过滤序列 The same as like array_filter() in PHP
 # filter()也接收一个函数和一个序列
 # filter()把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素
+# generator 属于惰性序列 不会一次性计算出所有序列元素的值，会通过next(i)来逐一取值
+# 无限的奇数序列
+def __odd__iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
 
+def primes():
+    yield 2
+    n = 2
+    it = __odd__iter()
+    while n < 1000:
+        n = next(it)
+        yield n
+        it = filter(lambda x:x % n > 0,it)
 
+print(list(primes()))
+
+# 过滤掉1-1000范围内的回数如909
+l = filter(lambda x:str(x) != str(x)[::-1],range(1,1000))
+print(list(l))
+# list = sorted(iterable,[key=func],[reverse=True]) 排序算法
+l = [('Herb',87),('Bad',99),('Ada',89),('Bart',98)]
+l1 = sorted(l,key=lambda x:x[0])
+print(sorted(l1,key=lambda x:x[1],reverse=True))

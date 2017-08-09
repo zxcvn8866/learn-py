@@ -78,3 +78,55 @@ print(list(l))
 l = [('Herb',87),('Bad',99),('Ada',89),('Bart',98)]
 l1 = sorted(l,key=lambda x:x[0])
 print(sorted(l1,key=lambda x:x[1],reverse=True))
+
+# 返回函数 闭包函数是
+def count():
+    fs = []
+    for i in range(1,4):
+        fs.append(lambda j=i:j*j)
+    return fs
+print([print(i()) for i in count()])
+
+# 匿名函数 作为函数返回值 冒号前是函数传入的参数 冒号后是个表达式作为匿名函数的返回值
+def build(x,y):
+    return lambda:x**2+y**2
+print(build(2,3)())
+
+# 装饰器  Decorator
+def log(func):
+    def wraper(*args,**kw):
+        print('call %s():' % func.__name__)
+        return func(*args,**kw)
+    return wraper
+@log
+def now():
+    import time
+    print(time.clock())
+now()
+
+import functools
+def log(*args):
+    text = args[0] if isinstance(args[0],str) else 'log'
+
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s before %s():' % (text, func.__name__))
+            result = func(*args, **kw)
+            print('%s after %s():' % (text, func.__name__))
+            return result
+        return wrapper
+    return decorator if isinstance(args[0],str) else decorator(args[0])
+# 直接是修饰方法 相当于log(fn)
+@log
+def test1():
+    print('test1')
+test1()
+
+
+# log('custom') 方法的返回值才是修饰方法 相当于log(str)(fn)
+@log('custom')
+def test2():
+    print('test2')
+test2()
+
